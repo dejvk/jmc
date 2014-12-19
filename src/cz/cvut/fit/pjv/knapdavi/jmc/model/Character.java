@@ -3,21 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jmc;
-
-import jdk.nashorn.internal.codegen.CompilerConstants;
+package cz.cvut.fit.pjv.knapdavi.jmc.model;
 
 /**
  *
  * @author Dejv
  * @version 0.1.1
  */
+
 public class Character implements Comparable {
 
     private final int guid;
     private String name;
+    private String fullName;
     private int playedTime;
-    private Zone zone;
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public Character setFullName(String fullName) {
+        this.fullName = fullName;
+        return this;
+    }
 
     public Character(int guid) {
         this.guid = guid;
@@ -49,29 +57,17 @@ public class Character implements Comparable {
     /**
      * @return the playedTime
      */
-    public int getPlayedTime() {
-        return playedTime;
+    public String getPlayedTime() {
+        String played = (playedTime / 60 / 60) + " hod (" + (playedTime / 60 / 60 / 24) + " dní)";
+        return played;
     }
 
     /**
      * @param playedTime the playedTime to set
      */
-    public void setPlayedTime(int playedTime) {
+    public Character setPlayedTime(int playedTime) {
         this.playedTime = playedTime;
-    }
-
-    /**
-     * @return the zone
-     */
-    public Zone getZone() {
-        return zone;
-    }
-
-    /**
-     * @param zone the zone to set
-     */
-    public void setZone(Zone zone) {
-        this.zone = zone;
+        return this;
     }
 
     /**
@@ -85,9 +81,15 @@ public class Character implements Comparable {
 
     @Override
     public int compareTo(Object t) {
-        if (t.getClass() == this.getClass())
+        if (t.getClass() == this.getClass()) {
             return compareChars((Character) t);
+        }
         throw new IllegalArgumentException("Cannot compare Character to different type.");
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 
 }

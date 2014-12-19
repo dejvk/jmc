@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jmc;
+package cz.cvut.fit.pjv.knapdavi.jmc.dao;
 
 /**
  *
- * @author Dejv
+ * @author dejvk
  */
-public enum Zone {
-    CASTLE,
-    JAIL,
-    PLAGUELANDS,
-    SILVERPINE,
-    TUTORIALZONE;
+public class CharacterDaoException extends Exception {
+
+    public CharacterDaoException(String msg) {
+        super(msg);
+    }
+    
 }

@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jmc;
+package cz.cvut.fit.pjv.knapdavi.jmc.dao;
 
+import cz.cvut.fit.pjv.knapdavi.jmc.model.Character;
 import java.util.List;
 
 /**
@@ -12,8 +13,7 @@ import java.util.List;
  * @author Dejv
  */
 public interface CharacterDao {
-    List getOnlineCharacters();
-    List getOnlineCharacters(Zone z);
-    Character getCharacter(String name);
-    Character getCharacter(int guid);
+    List getOnlineCharacters() throws CharacterDaoException;
+    Character getCharacter(String name) throws CharacterDaoException;
+    Character getCharacter(int guid) throws CharacterDaoException;
 }
