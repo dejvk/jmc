@@ -10,10 +10,9 @@ import java.util.List;
 
 /**
  * Defines which methods are required by connection classes.
- * @author Dejv
+ * @author knapdavi
  */
 public interface CharacterDao {
     List getOnlineCharacters() throws CharacterDaoException;
     Character getCharacter(String name) throws CharacterDaoException;
-    Character getCharacter(int guid) throws CharacterDaoException;
 }

@@ -7,7 +7,7 @@ package cz.cvut.fit.pjv.knapdavi.jmc.model;
 
 /**
  *
- * @author Dejv
+ * @author knapdavi
  * @version 0.1.1
  */
 

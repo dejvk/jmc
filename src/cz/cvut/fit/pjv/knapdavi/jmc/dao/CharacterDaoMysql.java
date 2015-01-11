@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  *
- * @author dejvk
+ * @author knapdavi
  */
 public class CharacterDaoMysql implements CharacterDao {
 
@@ -65,11 +65,6 @@ public class CharacterDaoMysql implements CharacterDao {
         } catch (SQLException e) {
             throw new CharacterDaoException("Připojení selhalo: " + e.getMessage());
         }
-    }
-
-    @Override
-    public Character getCharacter(int guid) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

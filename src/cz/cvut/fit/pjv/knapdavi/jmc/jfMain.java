@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author dejvk
+ * @author knapdavi
  */
 public class jfMain extends javax.swing.JFrame {
 
@@ -305,10 +305,10 @@ public class jfMain extends javax.swing.JFrame {
         Server game = new Server(hostname, 8090);
         Server dev = new Server(hostname, 8091);
 
-        jlDatabaseServerState.setText((data.state()) ? "online" : "offline");
-        jlAuthServerState.setText((auth.state()) ? "online" : "offline");
-        jlGameServerState.setText((game.state()) ? "online" : "offline");
-        jlDevServerState.setText((dev.state()) ? "online" : "offline");
+        jlDatabaseServerState.setText((data.getState()) ? "online" : "offline");
+        jlAuthServerState.setText((auth.getState()) ? "online" : "offline");
+        jlGameServerState.setText((game.getState()) ? "online" : "offline");
+        jlDevServerState.setText((dev.getState()) ? "online" : "offline");
 
         jbUpdateServerState.setText("Obnovit");
     }//GEN-LAST:event_jbUpdateServerStateActionPerformed
@@ -358,20 +358,32 @@ public class jfMain extends javax.swing.JFrame {
         this.findCharacter();
     }//GEN-LAST:event_jmFindCharacterActionPerformed
 
+    /**
+     * Switch to live data and enable finding characters by name
+     * @param evt 
+     */
     private void jmResourceDatabaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmResourceDatabaseActionPerformed
         try {
             database = new CharacterDaoMysql("wow.pk-nostalgia.cz", "pjv", "pjv2014");
+            jmFindCharacter.setEnabled(true);
         } catch (CharacterDaoException ex) {
             JOptionPane.showMessageDialog(this, "Při připojení došlo k chybě: " + ex.getMessage(), "Chyba!", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jmResourceDatabaseActionPerformed
 
+    /**
+     * Switch to test data and enable finding characters by name
+     * @param evt 
+     */
     private void jmResourceTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmResourceTestActionPerformed
         database = new CharacterDaoTest();
+        jmFindCharacter.setEnabled(false);
     }//GEN-LAST:event_jmResourceTestActionPerformed
 
     
-
+    /**
+     * Asks for character name and tries to find it
+     */
     private void findCharacter() {
         String charname = JOptionPane.showInputDialog("Zadejte prosím jméno postavy");
         try {

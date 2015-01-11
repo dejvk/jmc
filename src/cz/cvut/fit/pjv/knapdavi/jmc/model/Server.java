@@ -10,7 +10,7 @@ import java.net.Socket;
 
 /**
  * Represents a server to communicate with. Default port is 80.
- * @author Dejv
+ * @author knapdavi
  * @version 1.2
  */
 public class Server {
@@ -49,7 +49,7 @@ public class Server {
         this.port = port;
     }
 
-    public boolean state() {
+    public boolean getState() {
 
         Socket socket = null;
         boolean reachable = false;

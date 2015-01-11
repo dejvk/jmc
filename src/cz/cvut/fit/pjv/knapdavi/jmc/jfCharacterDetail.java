@@ -8,7 +8,7 @@ import cz.cvut.fit.pjv.knapdavi.jmc.model.Character;
 
 /**
  *
- * @author dejvk
+ * @author knapdavi
  */
 public class jfCharacterDetail extends javax.swing.JFrame {
 
@@ -54,7 +54,6 @@ public class jfCharacterDetail extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Detail postavy");
         setResizable(false);
-        setType(java.awt.Window.Type.UTILITY);
 
         jLabel1.setText("Systémové jméno:");
 

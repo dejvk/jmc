@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  *
- * @author dejvk
+ * @author knapdavi
  */
 public class CharacterDaoTest implements CharacterDao {
 
@@ -38,13 +38,8 @@ public class CharacterDaoTest implements CharacterDao {
     }
 
     @Override
-    public Character getCharacter(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Character getCharacter(String name) throws CharacterDaoException {
+        throw new CharacterDaoException("V testovacích datech nelze vyhledávat.");
     }
-
-    @Override
-    public Character getCharacter(int guid) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
+   
 }
