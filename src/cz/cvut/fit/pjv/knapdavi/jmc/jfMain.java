@@ -33,6 +33,7 @@ public class jfMain extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Při připojení došlo k chybě: " + ex.getMessage(), "Chyba!", JOptionPane.ERROR_MESSAGE);
             JOptionPane.showMessageDialog(this, "Program byl přepnut na práci s testovacími daty.", "Změna poskytovatele dat", JOptionPane.WARNING_MESSAGE);
             database = new CharacterDaoTest();
+            bgResourceSelection.setSelected(jmResourceTest.getModel(), true);
         }
     }
 
@@ -65,6 +66,7 @@ public class jfMain extends javax.swing.JFrame {
         jlDevServerState = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jmFile = new javax.swing.JMenu();
+        jmHelp = new javax.swing.JMenuItem();
         jmExit = new javax.swing.JMenuItem();
         jmCharacters = new javax.swing.JMenu();
         jmUpdateCharacterList = new javax.swing.JMenuItem();
@@ -79,11 +81,6 @@ public class jfMain extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Online postavy"));
 
-        jlOnlineList.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "- no characters -" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         jlOnlineList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jlOnlineList.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -212,6 +209,16 @@ public class jfMain extends javax.swing.JFrame {
         );
 
         jmFile.setText("Soubor");
+
+        jmHelp.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
+        jmHelp.setMnemonic('H');
+        jmHelp.setText("Nápověda");
+        jmHelp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmHelpActionPerformed(evt);
+            }
+        });
+        jmFile.add(jmHelp);
 
         jmExit.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_MASK));
         jmExit.setMnemonic('Z');
@@ -368,6 +375,7 @@ public class jfMain extends javax.swing.JFrame {
             jmFindCharacter.setEnabled(true);
         } catch (CharacterDaoException ex) {
             JOptionPane.showMessageDialog(this, "Při připojení došlo k chybě: " + ex.getMessage(), "Chyba!", JOptionPane.ERROR_MESSAGE);
+            bgResourceSelection.setSelected(jmResourceTest.getModel(), true);
         }
     }//GEN-LAST:event_jmResourceDatabaseActionPerformed
 
@@ -379,6 +387,11 @@ public class jfMain extends javax.swing.JFrame {
         database = new CharacterDaoTest();
         jmFindCharacter.setEnabled(false);
     }//GEN-LAST:event_jmResourceTestActionPerformed
+
+    private void jmHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmHelpActionPerformed
+        JFrame jf = new jfHelp();
+        jf.setVisible(true);
+    }//GEN-LAST:event_jmHelpActionPerformed
 
     
     /**
@@ -453,6 +466,7 @@ public class jfMain extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmExit;
     private javax.swing.JMenu jmFile;
     private javax.swing.JMenuItem jmFindCharacter;
+    private javax.swing.JMenuItem jmHelp;
     private javax.swing.JRadioButtonMenuItem jmResourceDatabase;
     private javax.swing.JRadioButtonMenuItem jmResourceTest;
     private javax.swing.JMenu jmSources;

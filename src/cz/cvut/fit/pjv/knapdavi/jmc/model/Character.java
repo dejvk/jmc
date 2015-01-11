@@ -10,7 +10,6 @@ package cz.cvut.fit.pjv.knapdavi.jmc.model;
  * @author knapdavi
  * @version 0.1.1
  */
-
 public class Character implements Comparable {
 
     private final int guid;
@@ -19,7 +18,11 @@ public class Character implements Comparable {
     private int playedTime;
 
     public String getFullName() {
-        return fullName;
+        if (fullName != null) {
+            return fullName;
+        } else {
+            return name;
+        }
     }
 
     public Character setFullName(String fullName) {
