@@ -8,10 +8,13 @@ package cz.cvut.fit.pjv.knapdavi.jmc;
 import cz.cvut.fit.pjv.knapdavi.jmc.dao.*;
 import cz.cvut.fit.pjv.knapdavi.jmc.model.Character;
 import cz.cvut.fit.pjv.knapdavi.jmc.model.Server;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 /**
  *
@@ -29,6 +32,9 @@ public class jfMain extends javax.swing.JFrame {
         initComponents();
         try {
             database = new CharacterDaoMysql("wow.pk-nostalgia.cz", "pjv", "pjv2014");
+            Timer timer = new Timer(0, new CharacterUpdateActionListener(this));
+            timer.start();
+            timer.setDelay(60*1000);
         } catch (CharacterDaoException ex) {
             JOptionPane.showMessageDialog(this, "Při připojení došlo k chybě: " + ex.getMessage(), "Chyba!", JOptionPane.ERROR_MESSAGE);
             JOptionPane.showMessageDialog(this, "Program byl přepnut na práci s testovacími daty.", "Změna poskytovatele dat", JOptionPane.WARNING_MESSAGE);
@@ -321,19 +327,7 @@ public class jfMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jbUpdateServerStateActionPerformed
 
     private void jbUpdateCharacterListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbUpdateCharacterListActionPerformed
-        jbUpdateCharacterList.setText("Obnovuji...");
-        try {
-            chars = database.getOnlineCharacters();
-        } catch (CharacterDaoException ex) {
-            JOptionPane.showMessageDialog(this, "Spojení se serverem bylo ztraceno.", "Chyba připojení", JOptionPane.ERROR_MESSAGE);
-        }
-        DefaultListModel charsModel = new DefaultListModel();
-        for (Character c : chars) {
-            charsModel.addElement(c);
-        }
-        jlOnlineList.setModel(charsModel);
-        jbUpdateCharacterList.setText("Obnovit");
-        //jbUpdateCharacterList.setText("Obnovit (" + new SimpleDateFormat("HH:mm").format(Calendar.getInstance().getTime()) + ")");
+        this.updateOnlineCharacters();
     }//GEN-LAST:event_jbUpdateCharacterListActionPerformed
 
     private void jlOnlineListFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jlOnlineListFocusLost
@@ -406,6 +400,22 @@ public class jfMain extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Chyba", JOptionPane.ERROR_MESSAGE);
         }
     }
+    
+    public void updateOnlineCharacters ()
+    {
+        jbUpdateCharacterList.setText("Obnovuji...");
+        try {
+            chars = database.getOnlineCharacters();
+        } catch (CharacterDaoException ex) {
+            JOptionPane.showMessageDialog(this, "Spojení se serverem bylo ztraceno.", "Chyba připojení", JOptionPane.ERROR_MESSAGE);
+        }
+        DefaultListModel charsModel = new DefaultListModel();
+        for (Character c : chars) {
+            charsModel.addElement(c);
+        }
+        jlOnlineList.setModel(charsModel);
+        jbUpdateCharacterList.setText("Obnovit");
+    }
 
     /**
      * @param args the command line arguments
@@ -472,4 +482,17 @@ public class jfMain extends javax.swing.JFrame {
     private javax.swing.JMenu jmSources;
     private javax.swing.JMenuItem jmUpdateCharacterList;
     // End of variables declaration//GEN-END:variables
+
+    private static class CharacterUpdateActionListener implements ActionListener {
+        jfMain parent;
+
+        private CharacterUpdateActionListener(jfMain frame) {
+            parent = frame;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            parent.updateOnlineCharacters();
+        }
+    }
 }
